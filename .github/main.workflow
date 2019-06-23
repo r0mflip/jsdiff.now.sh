@@ -13,6 +13,6 @@ action "filter-master" {
 action "Publish" {
   needs = "filter-master"
   uses = "netlify/actions/cli@master"
-  args = "deploy --dir=site"
+  args = "deploy --prod"
   secrets = ["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]
 }

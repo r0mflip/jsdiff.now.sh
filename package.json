@@ -21,7 +21,7 @@
     "url": "https://github.com/r0mflip/jsdiff.netlify.com/issues"
   },
   "homepage": "https://github.com/r0mflip/jsdiff.netlify.com#readme",
-  "devDependencies": {
+  "dependencies": {
     "@ramlmn/serv": "^0.8.0",
     "codemirror": "^5.48.0",
     "concurrently": "^4.1.0",
