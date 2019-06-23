@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="r0mflip">
+
+  <title>Diff</title>
+  <meta name="description" content="Diff text in your browser">
+
+  <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+
+  <header>
+    <h1>diff</h1>
+    <span class="flex__separator"></span>
+    <div class="controls">
+      <button class="action">Diff text</button>
+    </div>
+    <div class="controls view-controls">
+      <label class="view-control" for="viewtype-unified">
+        <input type="radio" value="unified" id="viewtype-unified" name="view-type" checked>
+        <span>Unified</span>
+      </label>
+      <label class="view-control" for="viewtype-split">
+        <input type="radio" value="split" id="viewtype-split" name="view-type">
+        <span>Split</span>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <section class="diff-text hidden">
+      <h2>Diff</h2>
+      <code class="code"></code>
+    </section>
+    <section class="old-text">
+      <h2>Original text</h2>
+      <textarea class="text-srcs">var tap = require('tap');
+var tape = require('../');
+var concat = require('concat-stream');
+
+var common = require('./common');
+var stripFullStack = common.stripFullStack;
+
+tap.test('tape todo test', function (assert) {
+    var test = tape.createHarness({ exit: false });
+    assert.plan(1);
+
+    test.createStream().pipe(concat(function (body) {
+        assert.equal(
+            stripFullStack(body.toString('utf8')),
+            'TAP version 13\n'
+            + '# success\n'
+            + 'ok 1 this test runs\n'
+            + '# TODO failure\n'
+            + 'not ok 2 should never happen # TODO\n'
+            + '  ---\n'
+            + '    operator: fail\n'
+            + '    at: Test.<anonymous> ($TEST/todo.js:$LINE:$COL)\n'
+            + '  ...\n'
+            + '\n'
+            + '1..2\n'
+            + '# tests 2\n'
+            + '# pass  2\n'
+            + '\n'
+            + '# ok\n'
+        )
+    }));
+
+    test('success', function (t) {
+        t.equal(true, true, 'this test runs');
+        t.end();
+    });
+
+    test('failure', { todo: true }, function (t) {
+        t.fail('should never happen');
+        t.end();
+    });
+});
+</textarea>
+    </section>
+    <section class="new-text">
+      <h2>Modified text</h2>
+      <textarea class="text-srcs">var tap = require('tap');
+var tape = require('../');
+var concat = require('concat-stream');
+
+var common = require('./common');
+var stripFullStack = common.stripFullStack;
+
+tap.test('tape todo test', function (assert) {
+    var test = tape.createHarness({ exit: false });
+    assert.plan(1);
+
+    test.createStream().pipe(concat(function (body) {
+        assert.equal(
+            stripFullStack(body.toString('utf8')),
+            'TAP version 13\n'
+            + '# success\n'
+            + 'ok 1 this test runs\n'
+            + '# TODO incomplete test1\n'
+            + 'not ok 2 needs insight # TODO\n'
+            + '  ---\n'
+            + '    operator: fail\n'
+            + '    at: Test.<anonymous> ($TEST/todo_explanation.js:$LINE:$COL)\n'
+            + '  ...\n'
+            + '# TODO incomplete test2\n'
+            + 'not ok 3 check description # TODO incomplete sentiment\n'
+            + '  ---\n'
+            + '    operator: fail\n'
+            + '    at: Test.<anonymous> ($TEST/todo_explanation.js:$LINE:$COL)\n'
+            + '  ...\n'
+            + '# TODO passing test\n'
+            + '\n'
+            + '1..3\n'
+            + '# tests 3\n'
+            + '# pass  3\n'
+            + '\n'
+            + '# ok\n'
+        )
+    }));
+
+    test('success', function (t) {
+        t.equal(true, true, 'this test runs');
+        t.end();
+    });
+
+    test('incomplete test1', { todo: true }, function (t) {
+        t.fail('needs insight');
+        t.end();
+    });
+
+    test('incomplete test2', { todo: 'incomplete sentiment' }, function (t) {
+        t.fail('check description');
+        t.end();
+    });
+
+    test('passing test', { todo: 'yet incomplete' }, function (t) {
+        t.end();
+    });
+});
+</textarea>
+    </section>
+  </main>
+
+  <script type="module" src="/index.js"></script>
+  <script nomodule src="/index.script.js"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+@import "../node_modules/codemirror/lib/codemirror.css";
+
+:root {
+  --color-text: #212121;
+  --font-size: 16px;
+  --editor-border-color: #dddddd;
+  --header-height: 52px;
+  --control-height: 36px;
+  --section-height: calc(100vh - var(--header-height) - 24px);
+  --section-height-small: calc(50vh - (var(--header-height) / 2) - 24px);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+*::before, *::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  margin: 0;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--color-text);
+  font-size: var(--font-size);
+  line-height: 1.5;
+}
+
+.flex__separator {
+  flex: 1;
+}
+
+header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  padding: 0.5rem;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.02),
+    0 1px 10px 0 rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.09);
+}
+
+header h1 {
+  font-size: 1.4rem;
+  padding: 0rem 0.4rem;
+  margin: 0;
+}
+
+header button {
+  cursor: pointer;
+  padding: 3px 8px;
+  font: inherit;
+  background: transparent;
+  border: 1px solid var(--color-text);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.controls:last-of-type {
+  margin-right: 0;
+}
+
+.view-controls {
+  border: 1px solid var(--color-text);
+}
+
+.view-control {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: 100%;
+}
+
+.view-control input {
+  display: none;
+}
+
+.view-control span {
+  display: flex;
+  color: var(--color-text);
+  height: 100%;
+  align-items: center;
+  padding: 0.2em 0.4em;
+}
+
+.view-control input:checked ~ span {
+  color: #ffffff;
+  background-color: var(--color-text);
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 12px;
+  grid-gap: 12px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+main section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: var(--section-height, 100vh);
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+}
+
+main section.hidden {
+  display: none;
+}
+
+main section .CodeMirror {
+  height: var(--section-height, 100vh);
+}
+
+main section .CodeMirror {
+  width: 100%;
+  line-height: 1.5;
+  border: 1px solid var(--editor-border-color);
+  height: auto;
+}
+
+main section .CodeMirror-linenumber {
+  color: #717171; /* 4.55:1 contrast ratio */
+}
+
+
+main section h2 {
+  font-size: var(--font-size);
+  font-weight: normal;
+  margin: 0;
+  padding: 8px;
+  text-align: center;
+}
+
+.text-srcs,
+code.code {
+  display: block;
+  font: inherit;
+  width: 100%;
+}
+
+.text-srcs {
+  height: 100%;
+  resize: vertical;
+  min-height: var(--section-height-small, 50vh);
+}
+
+.diff-text {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+code.code {
+  border: 1px solid var(--editor-border-color);
+  max-width: 900px;
+  overflow: auto;
+}
+
+code.code pre {
+  margin: 0;
+}
+
+code.code pre ins,
+code.code pre span,
+code.code pre del {
+  text-decoration: none;
+  padding: 0 4px;
+}
+
+code.code pre.del {
+  background-color: #ffeef0;
+}
+
+code.code pre.ins {
+  background-color: #e6ffed;
+}
+
+code.code pre .line-number {
+  display: inline-block;
+  padding-right: 4px;
+  background-color: #f7f7f7;
+  color: #717171;
+  user-select: none;
+  pointer-events: none;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  main {
+    grid-template-columns: 1fr;
+    grid-gap: 12px 0;
+  }
+
+  main section {
+    grid-column-start: 1;
+    height: auto;
+  }
+}

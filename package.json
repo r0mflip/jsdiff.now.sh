@@ -1,0 +1,41 @@
+{
+  "name": "jsdiff.netlify.com",
+  "version": "1.0.0",
+  "description": "A hybrid diff site",
+  "private": true,
+  "scripts": {
+    "build:js": "rollup -c rollup.config.js",
+    "build:css": "postcss src/index.css -m -o site/index.css -u postcss-nesting -u postcss-import -u postcss-short -u postcss-css-variables -u cssnano",
+    "build": "npm run build:js && npm run build:css",
+    "build:dev:js": "rollup -c rollup.config.dev.js --watch",
+    "build:dev:css": "postcss src/index.css -m -o site/index.css -u postcss-nesting -u postcss-import --watch",
+    "dev": "concurrently npm:build:dev:* \"serv -d site -p 9000\" --restart-tries 99999 --restart-after 200"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r0mflip/jsdiff.netlify.com.git"
+  },
+  "author": "r0mflip",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/r0mflip/jsdiff.netlify.com/issues"
+  },
+  "homepage": "https://github.com/r0mflip/jsdiff.netlify.com#readme",
+  "devDependencies": {
+    "@ramlmn/serv": "^0.8.0",
+    "codemirror": "^5.48.0",
+    "concurrently": "^4.1.0",
+    "cssnano": "^4.1.10",
+    "eslint": "^6.0.0",
+    "eslint-config-r0mflip": "^0.2.2",
+    "postcss-cli": "^6.1.2",
+    "postcss-css-variables": "^0.13.0",
+    "postcss-import": "^12.0.1",
+    "postcss-nesting": "^7.0.0",
+    "postcss-short": "^5.0.0",
+    "rollup": "^1.16.2",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-babel-minify": "^8.0.0",
+    "diff": "^4.0.1"
+  }
+}
