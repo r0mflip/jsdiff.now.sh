@@ -12,10 +12,7 @@ action "filter-master" {
 # start publish
 action "Publish" {
   needs = "filter-master"
-  uses = "netlify/actions/build@master"
-  secrets = ["GITHUB_TOKEN", "NETLIFY_SITE_ID"]
-  env = {
-    NETLIFY_CMD = "npm run build"
-    NETLIFY_DIR = "site/"
-  }
+  uses = "netlify/actions/cli@master"
+  args = "deploy --dir=site"
+  secrets = ["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]
 }
