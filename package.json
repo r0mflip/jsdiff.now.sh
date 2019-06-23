@@ -1,7 +1,7 @@
 {
   "name": "jsdiff.netlify.com",
   "version": "1.0.0",
-  "description": "A hybrid diff site",
+  "description": "A hybrid diff site?",
   "private": true,
   "scripts": {
     "build:js": "rollup -c rollup.config.js",
