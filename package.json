@@ -11,16 +11,6 @@
     "build:dev:css": "postcss src/index.css -m -o site/index.css -u postcss-nesting -u postcss-import --watch",
     "dev": "concurrently npm:build:dev:* \"serv -d site -p 9000\" --restart-tries 99999 --restart-after 200"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/r0mflip/jsdiff.netlify.com.git"
-  },
-  "author": "r0mflip",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/r0mflip/jsdiff.netlify.com/issues"
-  },
-  "homepage": "https://github.com/r0mflip/jsdiff.netlify.com#readme",
   "dependencies": {
     "@ramlmn/serv": "^0.8.0",
     "codemirror": "^5.48.0",
