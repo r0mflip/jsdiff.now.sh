@@ -16,6 +16,7 @@ action "Publish" {
   secrets = ["GITHUB_TOKEN", "NETLIFY_SITE_ID"]
   env = {
     NETLIFY_CMD = "npm run build"
+    NETLIFY_BASE = "."
     NETLIFY_DIR = "site/"
   }
 }
