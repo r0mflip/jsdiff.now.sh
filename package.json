@@ -5,11 +5,11 @@
   "private": true,
   "scripts": {
     "build:js": "rollup -c rollup.config.js",
-    "build:css": "postcss src/index.css -m -o site/index.css -u postcss-nesting -u postcss-import -u postcss-short -u postcss-css-variables -u cssnano",
+    "build:css": "postcss src/index.css -m -o dist/index.css -u postcss-nesting -u postcss-import -u postcss-short -u postcss-css-variables -u cssnano",
     "build": "npm run build:js && npm run build:css",
     "build:dev:js": "rollup -c rollup.config.dev.js --watch",
-    "build:dev:css": "postcss src/index.css -m -o site/index.css -u postcss-nesting -u postcss-import --watch",
-    "dev": "concurrently npm:build:dev:* \"serv -d site -p 9000\" --restart-tries 99999 --restart-after 200",
+    "build:dev:css": "postcss src/index.css -m -o dist/index.css -u postcss-nesting -u postcss-import --watch",
+    "dev": "concurrently npm:build:dev:* \"serv -d dist -p 9000\" --restart-tries 99999 --restart-after 200",
     "now-build": "npm run build"
   },
   "dependencies": {

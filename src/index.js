@@ -5,7 +5,7 @@ import CodeMirror from '../node_modules/codemirror/src/codemirror.js';
 const getDiffHTML = (oldValue, newValue, mode) => {
   if (mode === 'split') {
     return {
-      domText: '<center>Need help for Split mode at <a href="https://github.com/r0mflip/jsdiff.netlify.com" target="_blank" rel="noreferrer nofollow">https://github.com/r0mflip/jsdiff.netlify.com</a></center>',
+      domText: '<center>Need help for Split mode at <a href="https://github.com/r0mflip/jsdiff.now.sh" target="_blank" rel="noreferrer nofollow">https://github.com/r0mflip/jsdiff.now.sh</a></center>',
       linesLength: 1,
     };
   } else {
