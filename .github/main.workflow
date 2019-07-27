@@ -6,7 +6,7 @@ workflow "Deploy on Now" {
 # Deploy, and write deployment to file (every change deploy)
 action "deploy" {
   uses = "actions/zeit-now@master"
-  args = "--public --no-clipboard deploy ./site > $HOME/$GITHUB_ACTION.txt"
+  args = "--public --no-clipboard deploy ./dist > $HOME/$GITHUB_ACTION.txt"
   secrets = ["ZEIT_TOKEN"]
 }
 
