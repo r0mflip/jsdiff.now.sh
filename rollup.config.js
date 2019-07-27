@@ -5,7 +5,7 @@ export default [{
   input: 'src/index.js',
   plugins: [minify()],
   output: {
-    file: 'site/index.js',
+    file: 'dist/index.js',
     format: 'esm',
     name: 'jsdiff',
     sourcemap: true,
@@ -14,7 +14,7 @@ export default [{
   input: 'src/index.js',
   plugins: [babel({exclude: 'node_modules/**'}), minify()],
   output: {
-    file: 'site/index.script.js',
+    file: 'dist/index.script.js',
     format: 'iife',
     sourcemap: true,
   },

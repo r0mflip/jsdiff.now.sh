@@ -1,21 +1,23 @@
 {
-  "name": "jsdiff.netlify.com",
+  "name": "jsdiff.now.sh",
   "version": "0.0.1",
   "description": "A hybrid diff site?",
   "private": true,
   "scripts": {
     "build:js": "rollup -c rollup.config.js",
-    "build:css": "postcss src/index.css -m -o site/index.css -u postcss-nesting -u postcss-import -u postcss-short -u postcss-css-variables -u cssnano",
+    "build:css": "postcss src/index.css -m -o dist/index.css -u postcss-nesting -u postcss-import -u postcss-short -u postcss-css-variables -u cssnano",
     "build": "npm run build:js && npm run build:css",
     "build:dev:js": "rollup -c rollup.config.dev.js --watch",
-    "build:dev:css": "postcss src/index.css -m -o site/index.css -u postcss-nesting -u postcss-import --watch",
-    "dev": "concurrently npm:build:dev:* \"serv -d site -p 9000\" --restart-tries 99999 --restart-after 200"
+    "build:dev:css": "postcss src/index.css -m -o dist/index.css -u postcss-nesting -u postcss-import --watch",
+    "dev": "concurrently npm:build:dev:* \"serv -d dist -p 9000\" --restart-tries 99999 --restart-after 200",
+    "now-build": "npm run build"
   },
   "dependencies": {
     "@ramlmn/serv": "^0.8.0",
     "codemirror": "^5.48.0",
     "concurrently": "^4.1.0",
     "cssnano": "^4.1.10",
+    "diff": "^4.0.1",
     "eslint": "^6.0.0",
     "eslint-config-r0mflip": "^0.2.2",
     "postcss-cli": "^6.1.2",
@@ -25,7 +27,6 @@
     "postcss-short": "^5.0.0",
     "rollup": "^1.16.2",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-babel-minify": "^8.0.0",
-    "diff": "^4.0.1"
+    "rollup-plugin-babel-minify": "^9.0.0"
   }
 }

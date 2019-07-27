@@ -1,22 +1,26 @@
-workflow "Deploy to netlify" {
+workflow "Deploy on Now" {
   on = "push"
-  resolves = ["Publish"]
+  resolves = ["release"]
 }
 
-# filter for master branch
-action "filter-master" {
+# Stage for testing (then filter master to deploy)
+action "staging" {
+  uses = "actions/zeit-now@master"
+  args = "--target staging"
+  secrets = ["ZEIT_TOKEN"]
+}
+
+# Filter for master branch (release or not?)
+action "master-branch-filter" {
+  needs = "staging"
   uses = "actions/bin/filter@master"
   args = "branch master"
 }
 
-# start publish
-action "Publish" {
-  needs = "filter-master"
-  uses = "netlify/actions/build@master"
-  secrets = ["GITHUB_TOKEN", "NETLIFY_SITE_ID"]
-  env = {
-    NETLIFY_CMD = "npm run build"
-    NETLIFY_BASE = "."
-    NETLIFY_DIR = "site/"
-  }
+# Try a new release
+action "release" {
+  needs = "master-branch-filter"
+  uses = "actions/zeit-now@master"
+  secrets = ["ZEIT_TOKEN"]
+  args = "--target production"
 }
