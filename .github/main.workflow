@@ -1,22 +1,34 @@
-workflow "Deploy to netlify" {
+workflow "Deploy on Now" {
   on = "push"
-  resolves = ["Publish"]
+  resolves = ["release"]
 }
 
-# filter for master branch
-action "filter-master" {
+# Deploy, and write deployment to file (every change deploy)
+action "deploy" {
+  uses = "actions/zeit-now@master"
+  args = "--public --no-clipboard deploy ./site > $HOME/$GITHUB_ACTION.txt"
+  secrets = ["ZEIT_TOKEN"]
+}
+
+# Always create an alias using the SHA (then filter master to deploy)
+action "alias" {
+  needs = "deploy"
+  uses = "actions/zeit-now@master"
+  args = "alias `cat /github/home/deploy.txt` $GITHUB_SHA"
+  secrets = ["ZEIT_TOKEN"]
+}
+
+# Filter for master branch (alias to new deployment or not?)
+action "master-branch-filter" {
+  needs = "alias"
   uses = "actions/bin/filter@master"
   args = "branch master"
 }
 
-# start publish
-action "Publish" {
-  needs = "filter-master"
-  uses = "netlify/actions/build@master"
-  secrets = ["GITHUB_TOKEN", "NETLIFY_SITE_ID"]
-  env = {
-    NETLIFY_CMD = "npm run build"
-    NETLIFY_BASE = "."
-    NETLIFY_DIR = "site/"
-  }
+# Try a new release
+action "release" {
+  needs = "master-branch-filter"
+  uses = "actions/zeit-now@master"
+  secrets = ["ZEIT_TOKEN"]
+  args = "alias --local-config=./now.json"
 }
