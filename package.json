@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@ramlmn/serv": "^0.8.0",
-    "codemirror": "^5.48.0",
+    "codemirror": "^5.58.2",
     "concurrently": "^4.1.0",
     "cssnano": "^4.1.10",
     "diff": "^4.0.1",
